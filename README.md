@@ -16,6 +16,8 @@ $$ S(f_{esc}^{\rm LyC}) = \lambda_0 \exp\left( \boldsymbol\beta \cdot ( \mathbf{
 
 LyCsurv solves for the $f_{esc}^{\rm LyC}$ which satisfies the median and $1\sigma$ confidence intervals of $S$ given **x** observed for a user-provided sample of galaxy measurements.
 
+A fundamental nuance of the Cox model is that the $f_{esc}^{\rm LyC}$ predicted corresponds to the *global* escape fraction rather than the line-of-sight (see Jaskot et al. 2024 for discussion).
+
 ### Example Usage
 ``` python
 import pandas as pd
@@ -39,6 +41,8 @@ where
 $$ \lambda = \exp(\boldsymbol\beta \cdot \mathbf{x}^\prime) .$$
 
 LyCsurv solves for the $f_{esc}^{\rm LyC}$ which satisfies the median and $1\sigma$ confidence intervals of $S$ given **x** observed for a user-provided sample of galaxy measurements.
+
+Unlike the Cox model, the AFT $f_{esc}^{\rm LyC}$ is predominantly line-of-sight and thus typically exceeds the Cox $f_{esc}^{\rm LyC}$ as a result of anisotropic LyC escape (see Jaskot et al. 2024 for discussion).
 
 ### Example Usage
 ``` python
