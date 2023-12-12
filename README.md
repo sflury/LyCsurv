@@ -10,7 +10,7 @@ The hazard $\lambda$ is definied as the ratio of the probability $P$ of response
 
 Cox proportional hazards provides a semi-parametric prediction of the hazard function $\lambda$. The parametric component is the partial hazard function, a portion of the hazard inferred from a set of predictors **x** which are linearly combined. The non-parametric component is the baseline hazard $\lambda_0$, a part of the hazard function based solely on given responses rank-ordered by their values and accounting for upper limits. Together, the baseline and partial hazard predict $S(f_{esc}^{\rm LyC}|**x**})$ such that
 
-$$ S(f_{esc}^{\rm LyC}) = \lambda_0 \exp\left[ \boldsymbol{beta} \cdot ( \mathbf{x} - \bar{\mathbf{x}} )^\prime  \right] .$$
+$$ S(f_{esc}^{\rm LyC}) = \lambda_0 \exp\left( \boldsymbol\beta \cdot ( \mathbf{x} - \bar{\mathbf{x}} )^\prime  \right) .$$
 
 LyCsurv solves for the $f_{esc}^{\rm LyC}$ which satisfies the median and $1\sigma$ confidence intervals of $S$ given **x** observed for a user-provided sample of galaxy measurements.
 
