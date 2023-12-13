@@ -3,7 +3,7 @@
 #E(B-V)_nebular
 #E(B-V)_uv
 O32
-EW(Hb)
+#EW(Hb)
 #EW(O3+Hb)
 #EW(LyA)
 #L(H1r_4861A)
