@@ -56,6 +56,10 @@ print(f'accelerated failures fit fesc(LyC) : {aft_fit[:,1][0]:.3f}'+\
       f'-{aft_fit[:,0][0]:.3f}+{aft_fit[:,2][0]:.3f}')
 ```
 
+## The `params.lis` Input
+
+Included in the `./tab/` directory of `LyCsurv` is a table containing all of the possible inputs for predictor variables named according to the column headings in the reference training set of LzLCS+ galaxies contained in `/tab/lzlcs.csv`. To toggle a variable "off", add a \# before the variable name. To toggle a variable "on", simply omit the \#.
+
 ## BibTeX Citation
 ``` bibtex
 @ARTICLE{2024ApJ...J,
