@@ -1,14 +1,12 @@
 # LyCsurv
 
-Based on Jaskot et al. (2024a,b), this code predicts Lyman continuum (LyC) escape fractions (fesc) from given input variables using the Low-redshift Lyman Continuum Survey (LzLCS, Flury et al 2022a) combined with results from the literature. The authors request that any use of this code cite Jaskot et al. (2024a). A BibTeX reference is provided at the end of this document.
-
-`LyCsurv` solves for the $f_{esc}^{\rm LyC}$ which satisfies the median and $1\sigma$ confidence intervals of $S$ given **x** observed for a user-provided sample of galaxy measurements.
+Based on Jaskot et al. (2024a,b), the `LyCsurve` code predicts Lyman continuum (LyC) escape fractions (fesc) from given input variables using the Low-redshift Lyman Continuum Survey (LzLCS, Flury et al 2022a) combined with results from the literature. The authors request that any use of this code cite Jaskot et al. (2024a). A BibTeX reference is provided at the end of this document.
 
 ## Practical Details
 
-All files and scripts necessary to run `LyCsurv` are contained in this repository, including combined LzLCS+archival data (`./tab/lzlcs.csv`), a file to control input parameters (`./tab/params.lis`), and the source code (`LyCsurv.py`).
+All files and scripts necessary to run `LyCsurv` are contained in this repository, including combined LzLCS+archival data (`./tab/lzlcs.csv`), a file to control input parameters (`./tab/params.lis`), and the source code (`LyCsurv.py`). To run `LyCsurv`, simply download the zipped or clone the directory. To run locally, navigate into the directory and simply use an `ipython` terminal or a new script following the examples below.
 
-Variables for input are controlled via a table `./tab/params.lis`. To exclude a variable from the fitting routine, simply include a \# at the start of the line just as in python comments. To include a variable, simply delete the \#. In the examples below, only the `O32` and `beta1550` variables are included.
+Variables for input are controlled via a table `./tab/params.lis`. To exclude a variable from the fitting routine, simply include a \# at the start of the line just as in python comments. To include a variable, simply delete the \#. In the examples below, only the `O32` and `beta1550` variables are included. The params file is the only file the user should alter in any way.
 
 API documentation for `LyCsurv` is available [here](https://github.com/sflury/LyCsurv/wiki/API).
 
@@ -36,7 +34,7 @@ print(f'accelerated failures fit fesc(LyC) : {aft_fit[:,1][0]:.3f}'+\
       f'-{aft_fit[:,0][0]:.3f}+{aft_fit[:,2][0]:.3f}')
 ```
 
-## The `params.lis` Input
+## The `params.lis` Input File
 
 Included in the `./tab/` directory of `LyCsurv` is a table containing all of the possible inputs for predictor variables named according to the column headings in the reference training set of LzLCS+ galaxies contained in `/tab/lzlcs.csv`. To toggle a variable "off", add a \# before the variable name. To toggle a variable "on", simply omit the \#.
 
