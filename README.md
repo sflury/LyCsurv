@@ -1,37 +1,47 @@
 # LyCsurv
 
-Based on Jaskot et al. (2024a,b), the `LyCsurve` code predicts Lyman continuum (LyC) escape fractions (fesc) from given input variables using the Low-redshift Lyman Continuum Survey (LzLCS, Flury et al 2022a) combined with results from the literature. The authors request that any use of this code cite Jaskot et al. (2024a). A BibTeX reference is provided at the end of this document.
+Based on Jaskot et al. (2024a,b), the `LyCsurv` code predicts Lyman continuum (LyC) escape fractions (fesc) from given input variables using the Low-redshift Lyman Continuum Survey (LzLCS, Flury et al 2022a) combined with results from the literature. The authors request that any use of this code cite Jaskot et al. (2024a). A BibTeX reference is provided at the end of this document.
 
 ## Practical Details
 
-All files and scripts necessary to run `LyCsurv` are contained in this repository, including combined LzLCS+archival data (`./tab/lzlcs.csv`), a file to control input parameters (`./tab/params.lis`), and the source code (`LyCsurv.py`). To run `LyCsurv`, simply download the zipped or clone the directory. To run locally, navigate into the directory and simply use an `ipython` terminal or a new script following the examples below.
+Calling the `LyCsurv.cox_ph` or `LyCsurv.aft` functions will return an Nx3 array of the predicted fesc and its lower and upper uncertainties in the first, zeroth, and second rows, respectively, for each of N galaxies. In the worked examples below, N=1.
+
+All files and scripts necessary to run `LyCsurv` are contained in this repository, including combined LzLCS+archival data (`./tab/lzlcs.csv`), a file to control input parameters (`./tab/params.lis`), and the source code (`LyCsurv.py`). To run `LyCsurv`, simply download the zipped directory or clone the directory using `git`. To run locally, navigate into the `LyCsurv` (or `LyCsurv-main`) directory and simply use an `ipython` terminal or write a new script based on the examples below.
 
 Variables for input are controlled via a table `./tab/params.lis`. To exclude a variable from the fitting routine, simply include a \# at the start of the line just as in python comments. To include a variable, simply delete the \#. In the examples below, only the `O32` and `beta1550` variables are included. The params file is the only file the user should alter in any way.
 
-API documentation for `LyCsurv` is available [here](https://github.com/sflury/LyCsurv/wiki/API).
+For details, API documentation for `LyCsurv` is available [here](https://github.com/sflury/LyCsurv/wiki/API).
 
 ### Example Usage - Cox Proportional Hazards
 ``` python
-import pandas as pd
-from LyCsurv import *
-# pandas DataFrame of data
-dat = pd.DataFrame({'O32':[1.2],'beta1550':[-2.4]})
-# Cox proportional hazards fit
-cph_fit = cox_ph(dat)
-print(f'proportional hazards fit fesc(LyC) : {cph_fit[:,1][0]:.3f}'+\
-      f'-{cph_fit[:,0][0]:.3f}+{cph_fit[:,2][0]:.3f}')
+>>> import pandas as pd
+>>> from LyCsurv import *
+>>> # pandas DataFrame of data
+>>> dat = pd.DataFrame({'O32':[1.2],'beta1550':[-2.4]})
+>>> # Cox proportional hazards fit
+>>> cph_fit = cox_ph(dat)
+>>> print(f'proportional hazards fit fesc(LyC) : {cph_fit[:,1][0]:.3f}'+\
+...       f'-{cph_fit[:,0][0]:.3f}+{cph_fit[:,2][0]:.3f}')
+```
+
+```
+proportional hazards fit fesc(LyC) : 0.147-0.106+0.359
 ```
 
 ### Example Usage - Accelerated Failure Time
 ``` python
-import pandas as pd
-from LyCsurv import *
-# pandas DataFrame of data
-dat = pd.DataFrame({'O32':[1.2],'beta1550':[-2.4]})
-# accelerated failure time with Weibull distribution
-aft_fit = aft(dat)
-print(f'accelerated failures fit fesc(LyC) : {aft_fit[:,1][0]:.3f}'+\
-      f'-{aft_fit[:,0][0]:.3f}+{aft_fit[:,2][0]:.3f}')
+>>> import pandas as pd
+>>> from LyCsurv import *
+>>> # pandas DataFrame of data
+>>> dat = pd.DataFrame({'O32':[1.2],'beta1550':[-2.4]})
+>>> # accelerated failure time with Weibull distribution
+>>> aft_fit = aft(dat)
+>>> print(f'accelerated failures fit fesc(LyC) : {aft_fit[:,1][0]:.3f}'+\
+...       f'-{aft_fit[:,0][0]:.3f}+{aft_fit[:,2][0]:.3f}')
+```
+
+```
+accelerated failures fit fesc(LyC) : 0.369-0.312+0.631
 ```
 
 ## The `params.lis` Input File
