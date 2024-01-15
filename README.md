@@ -76,17 +76,26 @@ Unlike the Cox model, the AFT $f_{esc}^{\rm LyC}$ is predominantly line-of-sight
 
 ## BibTeX Citation
 ``` bibtex
-@ARTICLE{2024ApJ...J,
+@ARTICLE{Jaskot2024a,
        author = {{Jaskot}, Anne E., et al.},
-        title = "{}",
+        title = "{Multivariate Predictors of LyC Escape I: A Survival Analysis of the Low-redshift Lyman Continuum Survey}",
       journal = {\apj},
          year = 2024,
-        month = ,
-       volume = {},
+        month = jan,
+       volume = {sub},
        number = {},
         pages = {},
           doi = {} }
-}
+@ARTICLE{Jaskot2024b,
+       author = {{Jaskot}, Anne E., et al.},
+        title = "{Multivariate Predictors of LyC Escape II: Predicting LyC Escape Fractions for High-Redshift Galaxies}",
+      journal = {\apj},
+         year = 2024,
+        month = jan,
+       volume = {sub},
+       number = {},
+        pages = {},
+          doi = {} }
 ```
 
 ## Licensing
