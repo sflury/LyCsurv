@@ -24,9 +24,7 @@ For details, API documentation for `LyCsurv` is available [here](https://github.
 ...       f'-{cph_fit[:,0][0]:.3f}+{cph_fit[:,2][0]:.3f}')
 ```
 
-```
-proportional hazards fit fesc(LyC) : 0.147-0.106+0.359
-```
+> `proportional hazards fit fesc(LyC) : 0.147-0.106+0.359`
 
 ### Example Usage - Accelerated Failure Time
 ``` python
@@ -40,9 +38,7 @@ proportional hazards fit fesc(LyC) : 0.147-0.106+0.359
 ...       f'-{aft_fit[:,0][0]:.3f}+{aft_fit[:,2][0]:.3f}')
 ```
 
-```
-accelerated failures fit fesc(LyC) : 0.369-0.312+0.631
-```
+> ` accelerated failures fit fesc(LyC) : 0.369-0.312+0.631 `
 
 ## The `params.lis` Input File
 
