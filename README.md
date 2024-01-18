@@ -4,6 +4,11 @@ Based on Jaskot et al. (2024a,b), the `LyCsurv` code predicts Lyman continuum (L
 
 ## Practical Details
 
+The `LyCsurv` scripts depend on several software packages which are readily installed using `pip` from the command line. These packages include `numpy`, `matplotlib`, `lifelines`, and `scikit-survival`. For example
+```
+$ pip install lifelines
+```
+
 Calling the `LyCsurv.CoxPH` or `LyCsurv.AFT` functions will return an Nx3 array of the predicted fesc and its lower and upper uncertainties in the first, zeroth, and second rows, respectively, for each of N galaxies. In the worked examples below, N=1.
 
 All files and scripts necessary to run `LyCsurv` are contained in this repository, including combined LzLCS+archival data (`./tab/lzlcs.csv`), a file to control input parameters (`./tab/params.lis`), and the source code (`LyCsurv.py`). To run `LyCsurv`, simply download the zipped directory or clone the directory using `git`. To run locally, navigate into the `LyCsurv` (or `LyCsurv-main`) directory and simply use an `ipython` terminal or write a new script based on the examples below.
@@ -30,7 +35,7 @@ For details, API documentation for `LyCsurv` is available [here](https://github.
 
 which prints the $f_{esc}^{\rm LyC}$ predicted by the Cox PH model to the command line as
 
-> ```proportional hazards fit fesc(LyC) : 0.147-0.106+0.359```
+```proportional hazards fit fesc(LyC) : 0.147-0.106+0.359```
 
 Here, the output from `LyCsurv.cox_ph` as printed indicates a predicted $f_{esc}^{\rm LyC} = 0.146^{+0.359}_{-0.106}$.
 
