@@ -35,7 +35,9 @@ For details, API documentation for `LyCsurv` is available [here](https://github.
 
 which prints the $f_{esc}^{\rm LyC}$ predicted by the Cox PH model to the command line as
 
-```proportional hazards fit fesc(LyC) : 0.147-0.106+0.359```
+```
+proportional hazards fit fesc(LyC) : 0.147-0.106+0.359
+```
 
 Here, the output from `LyCsurv.cox_ph` as printed indicates a predicted $f_{esc}^{\rm LyC} = 0.146^{+0.359}_{-0.106}$.
 
@@ -55,7 +57,9 @@ Here, the output from `LyCsurv.cox_ph` as printed indicates a predicted $f_{esc}
 
 which prints the $f_{esc}^{\rm LyC}$ predicted by the AFT model to the command line as
 
-``` accelerated failures fit fesc(LyC) : 0.369-0.312+0.631 ```
+``` 
+accelerated failures fit fesc(LyC) : 0.369-0.312+0.631
+```
 
 Here, the output from `LyCsurv.AFT` as printed indicates a predicted $f_{esc}^{\rm LyC} = 0.369^{+0.631}_{-0.312}$.
 
