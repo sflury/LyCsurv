@@ -4,11 +4,13 @@ Based on Jaskot et al. (2024a,b), the `LyCsurv` code predicts Lyman continuum (L
 
 ## Practical Details
 
-Calling the `LyCsurv.cox_ph` or `LyCsurv.aft` functions will return an Nx3 array of the predicted fesc and its lower and upper uncertainties in the first, zeroth, and second rows, respectively, for each of N galaxies. In the worked examples below, N=1.
+Calling the `LyCsurv.CoxPH` or `LyCsurv.AFT` functions will return an Nx3 array of the predicted fesc and its lower and upper uncertainties in the first, zeroth, and second rows, respectively, for each of N galaxies. In the worked examples below, N=1.
 
 All files and scripts necessary to run `LyCsurv` are contained in this repository, including combined LzLCS+archival data (`./tab/lzlcs.csv`), a file to control input parameters (`./tab/params.lis`), and the source code (`LyCsurv.py`). To run `LyCsurv`, simply download the zipped directory or clone the directory using `git`. To run locally, navigate into the `LyCsurv` (or `LyCsurv-main`) directory and simply use an `ipython` terminal or write a new script based on the examples below.
 
 Variables for input are controlled via a table `./tab/params.lis`. To exclude a variable from the fitting routine, simply include a \# at the start of the line just as in python comments. To include a variable, simply delete the \#. In the examples below, only the `O32` and `beta1550` variables are included. The params file is the only file the user should alter in any way.
+
+Input data should come in the form of a dictionary or `pandas` dataframe (the latter is recommended). All columns to be used with `LyCsurv` must be named such that they match the names in the `params.lis` table.
 
 For details, API documentation for `LyCsurv` is available [here](https://github.com/sflury/LyCsurv/wiki/API).
 
@@ -16,29 +18,66 @@ For details, API documentation for `LyCsurv` is available [here](https://github.
 ``` python
 >>> import pandas as pd
 >>> from LyCsurv import *
->>> # pandas DataFrame of data
+>>> # pandas DataFrame
+>>> # should contain user’s input data table
+>>> # with measurements for the required input variables
 >>> dat = pd.DataFrame({'O32':[1.2],'beta1550':[-2.4]})
 >>> # Cox proportional hazards fit
->>> cph_fit = cox_ph(dat)
+>>> cph_fit = CoxPH(dat)
 >>> print(f'proportional hazards fit fesc(LyC) : {cph_fit[:,1][0]:.3f}'+\
 ...       f'-{cph_fit[:,0][0]:.3f}+{cph_fit[:,2][0]:.3f}')
 ```
 
-> `proportional hazards fit fesc(LyC) : 0.147-0.106+0.359`
+which prints the $f_{esc}^{\rm LyC}$ predicted by the Cox PH model to the command line as
+
+> ```proportional hazards fit fesc(LyC) : 0.147-0.106+0.359```
+
+Here, the output from `LyCsurv.cox_ph` as printed indicates a predicted $f_{esc}^{\rm LyC} = 0.146^{+0.359}_{-0.106}$.
 
 ### Example Usage - Accelerated Failure Time
 ``` python
 >>> import pandas as pd
 >>> from LyCsurv import *
->>> # pandas DataFrame of data
+>>> # pandas DataFrame
+>>> # should contain user’s input data table
+>>> # with measurements for the required input variables
 >>> dat = pd.DataFrame({'O32':[1.2],'beta1550':[-2.4]})
 >>> # accelerated failure time with Weibull distribution
->>> aft_fit = aft(dat)
+>>> aft_fit = AFT(dat)
 >>> print(f'accelerated failures fit fesc(LyC) : {aft_fit[:,1][0]:.3f}'+\
 ...       f'-{aft_fit[:,0][0]:.3f}+{aft_fit[:,2][0]:.3f}')
 ```
 
-> ` accelerated failures fit fesc(LyC) : 0.369-0.312+0.631 `
+which prints the $f_{esc}^{\rm LyC}$ predicted by the AFT model to the command line as
+
+``` accelerated failures fit fesc(LyC) : 0.369-0.312+0.631 ```
+
+Here, the output from `LyCsurv.AFT` as printed indicates a predicted $f_{esc}^{\rm LyC} = 0.369^{+0.631}_{-0.312}$.
+
+### Example Usage - Statistical Assessments
+``` python
+>>> import pandas as pd
+>>> from LyCsurv import *
+>>> # assess quality of trained model by
+>>> # instantiating LyCsurv.Train
+>>> train = Train(method='AFT')
+>>> train.pprint()
+>>> train.plot()
+```
+
+which prints to the terminal command line using the `pprint` method
+
+```
+     R^2  :  0.482
+ adj R^2  :  0.464
+     RMS  :  0.612
+ concord  :  0.209
+```
+
+and displays this figure using the `plot` method
+
+!['example of a training model using UV slope and O32 ratio'](train_examp.png)
+
 
 ## The `params.lis` Input File
 
@@ -58,7 +97,7 @@ Cox proportional hazards provides a semi-parametric prediction of the hazard fun
 
 $$ S(1-f_{esc}^{\rm LyC}) = \lambda_0 \exp\left( \boldsymbol\beta \cdot ( \mathbf{x} - \bar{\mathbf{x}} )^\prime  \right) .$$
 
-A fundamental nuance of the Cox model is that the $f_{esc}^{\rm LyC}$ predicted corresponds to the *global* escape fraction rather than the line-of-sight (see Jaskot et al. 2024 for discussion).
+A fundamental nuance of the Cox model is that the $f_{esc}^{\rm LyC}$ predicted is the *typical line-of-sight* $f_{esc}^{\rm LyC}$ for that set of input variables and gives its typical variation within the LzLCS. If the input variables are sensitive to LOS properties (e.g., absorption line depth), the predicted fesc will be LOS-specific too. If only global galaxy properties are used AND if we assume the LzLCS sufficiently probes all random orientations, then, yes, the predicted fesc = the global fesc. (see Jaskot et al. 2024 for discussion).
 
 ### Accelerated Failure
 
