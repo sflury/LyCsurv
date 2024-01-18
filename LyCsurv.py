@@ -141,7 +141,7 @@ def CoxPH(dat,resp='f_esc(LyC)',verbose=False,StatsVerbose=False):
     base = cph.baseline_cumulative_hazard_
     if StatsVerbose:
         mod = InterpPH(dat[pred],cph.predict_partial_hazard(dat[pred]),base)
-        return mod, ModAssess(trn[resp],mod[:,1],len(pred),trn['censors'])
+        return mod, ModAssess(1-trn[resp],1-mod[:,1],len(pred),trn['censors'])
     else:
         return InterpPH(dat[pred],cph.predict_partial_hazard(dat[pred]),base)
 
@@ -215,3 +215,101 @@ def AFT(dat,resp='f_esc(LyC)',verbose=False,intercept=True,StatsVerbose=False):
         return f, ModAssess(trn[resp],f[:,1],len(pred),trn['censors'])
     else:
         return f
+
+class Train(object):
+    '''
+    Name:
+        Train
+
+    Purpose:
+        Train a specified survival model on reference data and assess the results.
+
+    Keyword Arguments:
+        :resp (*str*): string indicating the desired response variable. Options are
+                'f_esc(LyC)', 'f_esc(LyA)', 'f(LyC)', and 'f(LyA)'. Default is
+                'f_esc(LyC)'.
+        :method (*str*): string indicating the method of survival analysis to be
+                used in the training run: 'CoxPH' or 'AFT'. Default is 'CoxPH'.
+
+    Attributes:
+        :train (*numpy.ndarray*): 88x2 array containing the observed and predicted
+                response variable
+        :stats (*tuple*): (_optional_) 4x1 tuple of model assessments
+                containing the R^2, adjusted R^2, RMS, and concordance index.
+                Only returned if `StatsVerbose` set to `True`.
+        :resp (*str*): response variable (corresponds to `resp` input)
+        :meth (*str*): method used for training (corresponds to `method` input)
+    '''
+    def __init__(self,resp='f_esc(LyC)',method='CoxPH',intercept=True,verbose=False):
+        self.resp = resp
+        self.meth = method
+        # read in data
+        trn = pd.read_csv('./tab/lzlcs.csv')
+        # censor array based on LyC detection
+        if 'LyC' in resp:
+            trn['censors'] = trn['P(>N|B)'] < 0.02275#0.00135#
+        elif 'LyA' in resp:
+            trn['censors'] = trn['f_esc(LyA)'] > 0.0
+            trn['f_esc(LyA)'][trn['f_esc(LyA)']<=0] = abs(trn['f_esc(LyA)'][trn['f_esc(LyA)']<=0])
+        c = np.where(trn['censors'].values)[0]
+        u = [i for i in trn.index if i not in c]
+        # predictor variables
+        pred = [line.strip() for line in open('./tab/params.lis').readlines()
+                if not line.startswith('#')]
+        trn = trn.dropna(subset=pred).reset_index()
+        # add in weights
+        trn['weights'] = trn[resp+' err'].values**-2
+        # Cox proportional hazard fit
+        if method == 'CoxPH':
+            # switch to left censoring
+            trn[resp] = 1-trn[resp]
+            cph = CoxPHFitter()
+            cph.fit(trn[pred+[resp,'censors']],resp,'censors',robust=True)#,weights_col='weights')
+            if verbose:
+                cph.print_summary()
+                print('---\nx̄')
+                print(trn[pred].mean(axis=0))
+            # results, including quantiles on fesc predictions
+            base = cph.baseline_cumulative_hazard_
+            mod = InterpPH(trn[pred],cph.predict_partial_hazard(trn[pred]),base)[:,1]
+            self.stats = ModAssess(trn[resp],1-mod,trn['censors'],len(pred))
+            trn[resp] = 1-trn[resp]
+        elif method == 'AFT':
+            aft = WeibullAFTFitter()
+            aft.fit(trn[pred+[resp,'censors']],duration_col=resp,event_col='censors',\
+                    fit_intercept=intercept)
+            if verbose:
+                aft.print_summary()
+            #
+            if intercept:
+                pred += ['Intercept']
+            #return aft.params_['lambda_'].values @ dat[pred].values.T
+            mod = aft.predict_percentile(trn,p=0.5)
+            self.stats = ModAssess(trn[resp],mod,trn['censors'],len(pred))
+
+        else:
+            print('Model method not recognized. Supported methods are either\n'+\
+                  '\'CoxPH\' for Cox proportional hazards or \'AFT\' for \n'+\
+                  'accelerated failure time.')
+        self.train = pd.DataFrame({f'{resp} obs':trn[resp],f'{resp} pred':mod})
+
+    def pprint(self):
+        for s,l in zip(self.stats,['R^2','adj R^2','RMS','concord']):
+            print(f'{l: >10s}  :  {s:5.3f}')
+
+    def plot(self):
+        line = [self.train.iloc[:,0].min()//1,self.train.iloc[:,0].max()//1+1]
+        plt.loglog(line,line,color='xkcd:cerulean')
+        plt.scatter(self.train.iloc[:,0],self.train.iloc[:,1],\
+                        c='xkcd:peach',edgecolor='black',zorder=4)
+        plt.xlabel(self.train.keys()[0])
+        plt.ylabel(self.train.keys()[1])
+        if 'f_esc' in self.resp:
+            plt.xticks([0.001,0.002,0.005,0.01,0.02,0.05,0.1,0.2,0.5,1.0],\
+                       ['1e-3','2e-3','5e-3',0.01,0.02,0.05,0.1,0.2,0.5,1.0])
+            plt.yticks([0.001,0.002,0.005,0.01,0.02,0.05,0.1,0.2,0.5,1.0],\
+                       ['1e-3','2e-3','5e-3',0.01,0.02,0.05,0.1,0.2,0.5,1.0])
+            plt.xlim(0.0075,1)
+            plt.ylim(0.0075,1)
+        plt.subplots_adjust(bottom=0.15,left=0.18,right=0.95,top=0.95)
+        plt.show()
