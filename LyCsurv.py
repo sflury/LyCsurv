@@ -38,7 +38,7 @@ def InterpPH(dat,part,base):
     f[:,[0,2]] = abs(np.diff(f[:,:3],axis=1))
     return f
 
-def ModAssess(trn,mod,cens,concord='harrell'):
+def ModAssess(trn,mod,cens,p,concord='harrell'):
     '''
     Name:
         ModAssess
@@ -251,8 +251,8 @@ class Train(object):
         elif 'LyA' in resp:
             trn['censors'] = trn['f_esc(LyA)'] > 0.0
             trn['f_esc(LyA)'][trn['f_esc(LyA)']<=0] = abs(trn['f_esc(LyA)'][trn['f_esc(LyA)']<=0])
-        c = np.where(trn['censors'].values)[0]
-        u = [i for i in trn.index if i not in c]
+        self.c = np.where(trn['censors'].values)[0]
+        self.u = [i for i in trn.index if i not in self.c]
         # predictor variables
         pred = [line.strip() for line in open('./tab/params.lis').readlines()
                 if not line.startswith('#')]
@@ -298,9 +298,12 @@ class Train(object):
             print(f'{l: >10s}  :  {s:5.3f}')
 
     def plot(self):
+        import matplotlib.pyplot as plt
         line = [self.train.iloc[:,0].min()//1,self.train.iloc[:,0].max()//1+1]
         plt.loglog(line,line,color='xkcd:cerulean')
-        plt.scatter(self.train.iloc[:,0],self.train.iloc[:,1],\
+        plt.scatter(self.train.iloc[self.u,0],self.train.iloc[self.u,1],\
+                        marker='$\u21A4$',edgecolor='xkcd:peach',s=100,zorder=4)
+        plt.scatter(self.train.iloc[self.c,0],self.train.iloc[self.c,1],\
                         c='xkcd:peach',edgecolor='black',zorder=4)
         plt.xlabel(self.train.keys()[0])
         plt.ylabel(self.train.keys()[1])
@@ -311,5 +314,6 @@ class Train(object):
                        ['1e-3','2e-3','5e-3',0.01,0.02,0.05,0.1,0.2,0.5,1.0])
             plt.xlim(0.0075,1)
             plt.ylim(0.0075,1)
+            plt.gca().set_aspect('equal')
         plt.subplots_adjust(bottom=0.15,left=0.18,right=0.95,top=0.95)
         plt.show()
