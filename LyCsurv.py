@@ -51,6 +51,7 @@ def ModAssess(trn,mod,cens,p,concord='harrell'):
         :trn (*np.ndarray*): Nx1 array of observed values
         :mod (*np.ndarray*): Nx1 array of predicted values
         :cens (*np.ndarray*): Nx1 array of censors as booleans
+        :p   (*int* or *float*): number of parameters used in fit
 
     Keyword Arguments:
         :concord (*str*): string indicating the method to use for concordance
