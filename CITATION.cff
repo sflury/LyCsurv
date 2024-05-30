@@ -4,6 +4,9 @@ type: software
 message: >-
   'If you use this software, please cite it using the metadata from this file.'
 authors:
+  - given-names: Sophia
+    family-names: Flury
+    orcid: 'https://orcid.org/0000-0002-0159-2613'
   - given-names: Anne
     family-names: Jaskot
     orcid: 'https://orcid.org/0000-0002-6790-5125'
@@ -12,9 +15,6 @@ authors:
   - given-names: Anna
     family-names: Plantinga
     orcid: 'https://orcid.org/0000-0001-6281-7727'
-  - given-names: Sophia
-    family-names: Flury
-    orcid: 'https://orcid.org/0000-0002-0159-2613'
 identifiers:
   - type: doi
     value: 10.5281/zenodo.11392442
