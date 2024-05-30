@@ -12,9 +12,6 @@ authors:
     orcid: 'https://orcid.org/0000-0002-6790-5125'
   - given-names: Anneliese  
     family-names: Silveyra
-  - given-names: Anna
-    family-names: Plantinga
-    orcid: 'https://orcid.org/0000-0001-6281-7727'
 identifiers:
   - type: doi
     value: 10.5281/zenodo.11392442
