@@ -15,5 +15,7 @@ authors:
 identifiers:
   - type: doi
     value: 10.5281/zenodo.11392442
+  - type: BibCode
+    value: ApJ AAS52207
 repository-code: 'https://github.com/sflury/LyCsurv'
 license: GPL-3.0-or-later
