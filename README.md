@@ -146,6 +146,9 @@ Unlike the Cox model, the AFT $f_{esc}^{\rm LyC}$ is predominantly line-of-sight
           doi = {} }
 ```
 
+[![DOI](https://zenodo.org/badge/730334029.svg)](https://zenodo.org/doi/10.5281/zenodo.11392442)
+
+
 ## Licensing
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
