@@ -125,25 +125,41 @@ Unlike the Cox model, the AFT $f_{esc}^{\rm LyC}$ is predominantly line-of-sight
 ## BibTeX Citation
 ``` bibtex
 @ARTICLE{Jaskot2024a,
-       author = {{Jaskot}, Anne E., et al.},
-        title = "{Multivariate Predictors of LyC Escape I: A Survival Analysis of the Low-redshift Lyman Continuum Survey}",
+       author = {{Jaskot}, Anne E. and {Silveyra}, Anneliese C. and {Plantinga}, Anna and {Flury}, Sophia R. and {Hayes}, Matthew and {Chisholm}, John and {Heckman}, Timothy and {Pentericci}, Laura and {Schaerer}, Daniel and {Trebitsch}, Maxime and {Verhamme}, Anne and {Carr}, Cody and {Ferguson}, Henry C. and {Ji}, Zhiyuan and {Giavalisco}, Mauro and {Henry}, Alaina and {Marques-Chaves}, Rui and {{\"O}stlin}, G{\"o}ran and {Saldana-Lopez}, Alberto and {Scarlata}, Claudia and {Worseck}, G{\'a}bor and {Xu}, Xinfeng},
+        title = "{Multivariate Predictors of Lyman Continuum Escape. I. A Survival Analysis of the Low-redshift Lyman Continuum Survey}",
       journal = {\apj},
+     keywords = {Astrostatistics, Reionization, High-redshift galaxies, Starburst galaxies, Interstellar medium, Ultraviolet astronomy, Radiative transfer, 1882, 1383, 734, 1570, 847, 1736, 1335, Astrophysics - Astrophysics of Galaxies},
          year = 2024,
-        month = jan,
-       volume = {sub},
-       number = {},
-        pages = {},
-          doi = {} }
+        month = sep,
+       volume = {972},
+       number = {1},
+          eid = {92},
+        pages = {92},
+          doi = {10.3847/1538-4357/ad58b9},
+archivePrefix = {arXiv},
+       eprint = {2406.10171},
+ primaryClass = {astro-ph.GA},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024ApJ...972...92J},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 @ARTICLE{Jaskot2024b,
-       author = {{Jaskot}, Anne E., et al.},
-        title = "{Multivariate Predictors of LyC Escape II: Predicting LyC Escape Fractions for High-Redshift Galaxies}",
+       author = {{Jaskot}, Anne E. and {Silveyra}, Anneliese C. and {Plantinga}, Anna and {Flury}, Sophia R. and {Hayes}, Matthew and {Chisholm}, John and {Heckman}, Timothy and {Pentericci}, Laura and {Schaerer}, Daniel and {Trebitsch}, Maxime and {Verhamme}, Anne and {Carr}, Cody and {Ferguson}, Henry C. and {Ji}, Zhiyuan and {Giavalisco}, Mauro and {Henry}, Alaina and {Marques-Chaves}, Rui and {{\"O}stlin}, G{\"o}ran and {Saldana-Lopez}, Alberto and {Scarlata}, Claudia and {Worseck}, G{\'a}bor and {Xu}, Xinfeng},
+        title = "{Multivariate Predictors of Lyman Continuum Escape. II. Predicting Lyman Continuum Escape Fractions for High-redshift Galaxies}",
       journal = {\apj},
+     keywords = {Astrostatistics, Reionization, High-redshift galaxies, Starburst galaxies, Interstellar medium, Ultraviolet astronomy, Radiative transfer, 1882, 1383, 734, 1570, 847, 1736, 1335, Astrophysics - Astrophysics of Galaxies},
          year = 2024,
-        month = jan,
-       volume = {sub},
-       number = {},
-        pages = {},
-          doi = {} }
+        month = oct,
+       volume = {973},
+       number = {2},
+          eid = {111},
+        pages = {111},
+          doi = {10.3847/1538-4357/ad5557},
+archivePrefix = {arXiv},
+       eprint = {2406.10179},
+ primaryClass = {astro-ph.GA},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024ApJ...973..111J},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 ```
 
 ## Zenodo DOI
