@@ -122,8 +122,22 @@ Under this formalism, the `lifelines` AFT implementation assumes a Weibull distr
 
 Unlike the Cox model, the AFT $f_{esc}^{\rm LyC}$ is predominantly line-of-sight and thus typically exceeds the Cox $f_{esc}^{\rm LyC}$ as a result of anisotropic LyC escape (see Jaskot et al. 2024 for discussion).
 
-## BibTeX Citation
+## BibTeX References
 ``` bibtex
+@software{2024zndo..11392442F,
+       author = {{Flury}, Sophia and {Jaskot}, Anne and {Silveyra}, Anneliese},
+        title = "{LyCsurv}",
+         year = 2024,
+        month = may,
+          eid = {10.5281/zenodo.11392442},
+          doi = {10.5281/zenodo.11392442},
+      version = {v0.1.0},
+    publisher = {Zenodo},
+          url = {https://github.com/sflury/LyCsurv},
+      license = {GPL-3.0-or-later},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024zndo..11392442F},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 @ARTICLE{Jaskot2024a,
        author = {{Jaskot}, Anne E. and {Silveyra}, Anneliese C. and {Plantinga}, Anna and {Flury}, Sophia R. and {Hayes}, Matthew and {Chisholm}, John and {Heckman}, Timothy and {Pentericci}, Laura and {Schaerer}, Daniel and {Trebitsch}, Maxime and {Verhamme}, Anne and {Carr}, Cody and {Ferguson}, Henry C. and {Ji}, Zhiyuan and {Giavalisco}, Mauro and {Henry}, Alaina and {Marques-Chaves}, Rui and {{\"O}stlin}, G{\"o}ran and {Saldana-Lopez}, Alberto and {Scarlata}, Claudia and {Worseck}, G{\'a}bor and {Xu}, Xinfeng},
         title = "{Multivariate Predictors of Lyman Continuum Escape. I. A Survival Analysis of the Low-redshift Lyman Continuum Survey}",
