@@ -104,7 +104,7 @@ The hazard $\lambda$ is definied as the ratio of the probability $P$ of response
 
 Cox proportional hazards provides a semi-parametric prediction of the hazard function $\lambda$. The parametric component is the partial hazard function, a portion of the hazard inferred from a set of predictors **x** which are linearly combined. The non-parametric component is the baseline hazard $\lambda_0$, a part of the hazard function based solely on given responses rank-ordered by their values and accounting for upper limits. Together, the baseline and partial hazard predict $S(f_{esc}^{\rm LyC}|\mathbf{x})$ such that
 
-$$ S(1-f_{esc}^{\rm LyC}) = \lambda_0 \exp\left( \boldsymbol\beta \cdot ( \mathbf{x} - \bar{\mathbf{x}} )^\prime  \right) .$$
+$$ S(1-f_{esc}^{\rm LyC}) = \lambda_0 \exp\left( \beta \cdot ( \mathbf{x} - \bar{\mathbf{x}} )^\prime  \right) .$$
 
 A fundamental nuance of the Cox model is that the $f_{esc}^{\rm LyC}$ predicted is the *typical line-of-sight* $f_{esc}^{\rm LyC}$ for that set of input variables and gives its typical variation within the LzLCS. If the input variables are sensitive to LOS properties (e.g., absorption line depth), the predicted fesc will be LOS-specific too. If only global galaxy properties are used AND if we assume the LzLCS sufficiently probes all random orientations, then, yes, the predicted fesc = the global fesc. (see Jaskot et al. 2024 for discussion).
 
@@ -116,7 +116,7 @@ $$ S(f_{esc}^{\rm LyC}) = \left(\frac{f_{esc}^{\rm LyC}}{\lambda}\right)^\rho$$
 
 where
 
-$$ \lambda = \exp(\boldsymbol\beta \cdot \mathbf{x}^\prime) .$$
+$$ \lambda = \exp(\beta \cdot \mathbf{x}^\prime) .$$
 
 Under this formalism, the `lifelines` AFT implementation assumes a Weibull distribution.
 
